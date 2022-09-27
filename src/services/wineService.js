@@ -2,8 +2,9 @@ const Wine = require("../models/Wine");
 
 async function getAll(query) {
   if (query) {
-    const userId = query.split("=")[1].slice(1, -1);
-    return Wine.find({ _ownerId: userId });
+    const wineType = query.split("=")[1].slice(1, -1);
+
+    return Wine.find({ type: wineType });
   }
   return Wine.find({});
 }

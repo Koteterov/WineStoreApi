@@ -2,10 +2,13 @@ const router = require("express").Router();
 
 const api = require("../services/wineService");
 
+
+
 router.get("/wines", async (req, res) => {
   try {
     res.json(await api.getAll(req.query.where));
   } catch (err) {
+    console.log(err);
     res.status(400).json({ message: "Bad request" });
   }
 });
