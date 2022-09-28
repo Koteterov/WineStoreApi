@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const connectionString = "mongodb://localhost:27017/winesStore";
+const connectionString = process.env.DB_HOST;
 
 exports.initializeDatabase = () => {
   mongoose.connection.on("open", () => console.log("DB is connected"));

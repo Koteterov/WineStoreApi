@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
 const express = require('express');
+require("dotenv").config();
+
 
 
 const { initializeDatabase } = require("./src/config/database");
@@ -11,6 +12,10 @@ const orderController = require('./src/controllers/orderController');
 
 
 const app = express();
+
+
+const port = process.env.PORT
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(auth());
@@ -23,7 +28,7 @@ app.use('/users', usersController);
 
 initializeDatabase()
   .then(() => {
-    app.listen(3040, () => console.log("Rest service is listening on port 3040"));
+    app.listen(port, () => console.log(`Rest service is listening on port ${port}`));
   })
   .catch((err) => {
     console.log("Cannot connect to DB", err);
