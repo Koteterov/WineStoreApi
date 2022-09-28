@@ -3,8 +3,11 @@ const router = require("express").Router();
 const api = require("../services/wineService");
 const userService = require("../services/userService");
 
+const { isAuth } = require('../middlewares/guards');
 
-router.get("/", async (req, res) => {
+
+
+router.get("/", isAuth(), async (req, res) => {
     try {
       const userOrders = await userService.getUserOrders(req.user._id);
       res.json(userOrders.ordersHistory);
@@ -17,7 +20,7 @@ router.get("/", async (req, res) => {
     }
   });
   
-  router.post("/", async (req, res) => {
+  router.post("/", isAuth(), async (req, res) => {
     const data = req.body;
     try {
       const createdOrder = await api.creatOrder({ ...data, user: req.user._id });
