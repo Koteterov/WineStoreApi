@@ -3,13 +3,9 @@ const authService = require("../services/authService");
 
 router.post("/register", async (req, res) => {
   const { email, password } = req.body;
-  // console.log('email', email);
-  // console.log('password', password);
 
   try {
-    console.log("11result", email);
     const result = await authService.register(email, password);
-
     res.status(201).json(result);
   } catch (err) {
     console.log(err);
@@ -20,9 +16,11 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+
   try {
     const result = await authService.login(email, password);
     res.json(result);
+
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: err.message });
@@ -32,7 +30,6 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res) => {
   authService.logout(req.user.token);
   res.status(204).end();
-  // res.redirect("/");
 });
 
 module.exports = router;
