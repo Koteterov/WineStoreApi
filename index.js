@@ -7,6 +7,7 @@ const auth  = require("./src/middlewares/auth");
 const cors = require('./src/middlewares/cors');
 const wineController = require('./src/controllers/wineController');
 const usersController = require('./src/controllers/usersController');
+const orderController = require('./src/controllers/orderController');
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(auth());
 app.use(cors());
 
 app.use('/data', wineController);
+app.use('/data/cart', orderController);
 app.use('/users', usersController);
 
 

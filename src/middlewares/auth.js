@@ -8,6 +8,7 @@ module.exports = () => (req, res, next) => {
         try {
             const payload = authService.validateToken(token);
 
+
             req.user = {
                 email: payload.email,
                 _id: payload._id,
